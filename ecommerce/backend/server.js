@@ -5,7 +5,7 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded
-({ extended: false }));
+({ extended:false}));
 const port = process.env.PORT || 5000;
 app.use("/api/auth",authRoutes)
 app.listen(port, () => {

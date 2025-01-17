@@ -1,10 +1,18 @@
-import mongoose from 'mongoose';
+import {drizzle} from "drizzle-orm/mysql2";
+import mysql from "mysql2/promise";
+import dotenv from "dotenv";
 
-export const connectToDb = async () => {
-    try {
-        await mongoose.connect(process.env.MONGO_URI);
-    } catch (err) {
-        console.log("error connecting to mongodb" + err.message);
-        process.exit(1);
-    }
+dotenv.config();
+
+async function setupDb() {
+    const connection = await mysql.createConnection({
+        host: "localhost",
+        user: "root",
+        database: process.env.MYSQL_DATABASE,
+        password: process.env.MYSQL_PASSWORD,
+    });
+    return drizzle({client: connection},{logging:true});
 }
+
+const db = await setupDb();
+export default db;
