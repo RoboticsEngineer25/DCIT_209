@@ -28,6 +28,7 @@ export const signup = async (req, res) => {
 
 
         res.cookie("user_id",user_id[0].userId)
+        console.log(req.cookies.user_id)
         res.status(200).json({message: "user created successfully",info:user_id[0].userId})
 
     } catch (err) {
