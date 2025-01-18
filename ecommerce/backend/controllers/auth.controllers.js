@@ -1,9 +1,9 @@
 import db from '../lib/db.js';
 // users table schema import
 import {users} from "../lib/ormSchema.js";
-
+import {eq} from "drizzle-orm"
 export const signup = async (req, res) => {
-    const {email, password, firstName, lastName, gender, phoneNumber} = req.body;
+    const {email, password, firstName, lastName, gender, phoneNumber,role} = req.body;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     try {
 
@@ -17,9 +17,19 @@ export const signup = async (req, res) => {
             return res.status(400).send({message: "invalid email"})
         }
         await db.insert(users).values({
-            email, firstName, lastName, gender, phoneNumber, password
+            email, firstName, lastName, gender, phoneNumber, password,role
         })
-        res.status(200).json({message: "user created successfully"})
+
+
+        const user_id = await db
+            .select({ userId: users.userId })
+            .from(users)
+            .where(eq(users.email, email));
+
+
+        res.cookie("user_id",user_id[0].userId)
+        res.status(200).json({message: "user created successfully",info:user_id[0].userId})
+
     } catch (err) {
         console.log(err.message)
         res.status(500).json({message: "internal server error",error:err.message})

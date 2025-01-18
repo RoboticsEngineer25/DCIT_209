@@ -9,6 +9,7 @@ export const users = mysqlTable("Users", {
     lastName: varchar("last_name", { length: 50 }).default("none"),
     phoneNumber: varchar("phone_number",{length:10}).notNull().unique(),
     gender:mysqlEnum("gender",["male","female"]).notNull(),
+    role:mysqlEnum("role",["admin","user"]).default("user"),
     createdAt: timestamp("created_at", { mode: "string" }).defaultNow(),
     updatedAt: timestamp("updated_at", { mode: "string" }).defaultNow().onUpdateNow(),
 });
