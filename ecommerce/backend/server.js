@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import authRoutes from "./routes/auth.route.js";
 import categoriesRoute from "./routes/categories.route.js";
 import productRoute from "./routes/product.route.js";
+import wishlistRoute
 import cookieParser from "cookie-parser";
 dotenv.config();
 const app = express();

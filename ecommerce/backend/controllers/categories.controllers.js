@@ -1,9 +1,9 @@
 import db from "../lib/db.js";
 import { categories } from "../lib/ormSchema.js";
-import {eq} from "drizzle-orm"
+import { eq } from "drizzle-orm";
+
 export async function addCategory(req, res) {
     try {
-
         const { categoryName, parentCategoryId } = req.body;
 
         if (!categoryName) {
@@ -21,11 +21,12 @@ export async function addCategory(req, res) {
         res.status(500).json({ error: "Internal server error." });
     }
 }
+
 export async function getAllCategories(req, res) {
     try {
         const allCategories = await db.select().from(categories);
 
-        res.status(200).json({ data: allCategories});
+        res.status(200).json({ data: allCategories });
     } catch (error) {
         console.error("Error fetching categories:", error);
         res.status(500).json({ error: "Internal server error." });
@@ -48,11 +49,13 @@ export async function getCategoryById(req, res) {
         res.status(500).json({ error: "Internal server error." });
     }
 }
+
 export async function updateCategory(req, res) {
     try {
         const { id } = req.params;
         const { categoryName, parentCategoryId } = req.body;
 
+        // Update the category with the provided name and parent category ID
         const result = await db
             .update(categories)
             .set({ categoryName, parentCategoryId })
@@ -68,6 +71,7 @@ export async function updateCategory(req, res) {
         res.status(500).json({ error: "Internal server error." });
     }
 }
+
 export async function deleteCategory(req, res) {
     try {
         const { id } = req.params;
