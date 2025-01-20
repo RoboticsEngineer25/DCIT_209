@@ -1,6 +1,5 @@
 body{
-    background-image: linear-gradient(green,white);
-    background-repeat: no-repeat;
+    background-color:rgb(221, 200, 172);
 
 }
    
@@ -148,4 +147,12 @@ button.seemore{
     ul.navbar li.right{
         padding: 10px;
     }
+}
+footer{
+    background-color:black ;
+    width: 100%;
+}
+.contact{
+    color:white;
+    width: 20%;
 }
