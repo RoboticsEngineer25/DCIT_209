@@ -3,12 +3,28 @@ import dotenv from 'dotenv';
 import authRoutes from "./routes/auth.route.js";
 import categoriesRoute from "./routes/categories.route.js";
 import productRoute from "./routes/product.route.js";
-import wishlistRoute
+import wishlistRoute from "./routes/wishlist.route.js";
+import cors from "cors";
 import cookieParser from "cookie-parser";
 dotenv.config();
 const app = express();
 app.use(cookieParser());
 app.use(express.json());
+const allowedOrigins = ["http://localhost:5173"]; // Add your frontend's origin
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true, 
+  })
+);
+
 app.use(express.urlencoded
 ({ extended:false}));
 const port = process.env.PORT || 5000;

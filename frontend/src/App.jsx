@@ -1,7 +1,7 @@
 import './App.css'
 import ResetPassword from "./components/ResetPassword.jsx";
 import SignIn from "./components/SignIn.jsx";
-import SignUp from "../SignUp.jsx";
+import SignUp from "./components/SignUp.jsx";
 import HomePage from "./components/Homepage.jsx";
 import {Route, Routes} from "react-router";
 

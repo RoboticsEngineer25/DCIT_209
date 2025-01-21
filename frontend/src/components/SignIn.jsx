@@ -1,7 +1,37 @@
 import React from 'react';
 import {Link} from "react-router";
-
+import Context from '../context/context';
+import { useContext } from 'react';
+import { useMutation } from '@tanstack/react-query';
+import { useNavigate } from 'react-router';
 const SignIn = () => {
+    const {email,setEmail,password,setPassword} = useContext(Context);
+    const navigate=useNavigate();
+    console.log(email,password)
+    
+    const mutation = useMutation({
+      mutationFn: async (data) => {
+        const response = await fetch("http://localhost:5000/api/auth/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        });
+        const result = await response.json();
+        if (!response.ok) {
+          throw new Error(result.message || "Something went wrong");
+        }
+        return result;
+      },
+      onError: (error) => {
+        console.log("SignIn error:", error.message);
+      },
+      onSuccess: (data) => {
+        console.log("SignIn successful:", data);
+        navigate("/home")
+      },
+    });
     return (
         <div>
             <form  onSubmit={e => e.preventDefault()}>
@@ -32,6 +62,8 @@ const SignIn = () => {
                                 style={{ width: '100%' }}
                                 placeholder="Email"
                                 required
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                             />
                         </td>
                     </tr>
@@ -53,6 +85,8 @@ const SignIn = () => {
                                 style={{ width: '100%' }}
                                 placeholder="Password"
                                 required
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
                             />
                         </td>
                     </tr>
@@ -81,11 +115,12 @@ const SignIn = () => {
                     </tr>
                     <tr>
                         <td colSpan="2">
-                            <input
-                                type="submit"
+                            <button
+                                type="button"
                                 value="Continue"
                                 style={{ width: '100%', height: '30px' }}
-                            />
+                                onClick={() => mutation.mutate({ email, password })}
+                            >Sign Up</button>
                         </td>
                     </tr>
                     <tr>

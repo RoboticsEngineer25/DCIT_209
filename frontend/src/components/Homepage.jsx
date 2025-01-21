@@ -24,9 +24,9 @@ const HomePage = () => {
         description: "Sports",
       },
       {
-        image: "https://placeimg.com/300/300",
-        alt: "category:rand",
-        description: "rand",
+        image: "https://via.assets.so/Furniture.png?id=1&q=95&w=360&h=360&fit=fill",
+        alt: "category:furniture",
+        description: "furniture",
       },
     ];
     return (
