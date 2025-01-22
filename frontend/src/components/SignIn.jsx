@@ -29,7 +29,7 @@ const SignIn = () => {
       },
       onSuccess: (data) => {
         console.log("SignIn successful:", data);
-        navigate("/home")
+        navigate("/homepage")
       },
     });
     return (
