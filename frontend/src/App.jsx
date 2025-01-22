@@ -10,6 +10,7 @@ import Index from './components/Index.jsx';
 import ShoppingCart from './components/cart.jsx';
 import Electronics from './components/Electronics.jsx';
 import Fashion from './components/fashion.jsx';
+import Product from './components/product.jsx';
 function App() {
 
     return (
@@ -25,6 +26,7 @@ function App() {
                 <Route path= "/cart" element ={<ShoppingCart/>}/>
                 <Route path='/electronics' element={<Electronics/>}/>
               <Route path='/fashion' element={<Fashion/>}/>
+              <Route path="/products" element ={<Product/>}/>
             </Routes>
 
         </>

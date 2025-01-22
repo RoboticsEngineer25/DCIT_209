@@ -91,7 +91,7 @@ const Index= () => {
             />
           </li>
           {[
-            { to: "/", text: "Home" },
+            { to: "/homepage", text: "Home" },
             { to: "/categories", text: "Categories" },
             { to: "/account", text: "Account" },
             { to: "/wishlist", text: "Wishlist" },
