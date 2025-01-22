@@ -120,7 +120,7 @@ const SignIn = () => {
                                 value="Continue"
                                 style={{ width: '100%', height: '30px' }}
                                 onClick={() => mutation.mutate({ email, password })}
-                            >Sign Up</button>
+                            >Sign In</button>
                         </td>
                     </tr>
                     <tr>

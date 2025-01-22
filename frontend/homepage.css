@@ -1,5 +1,5 @@
 body{
-    background-color:rgb(221, 200, 172);
+    background-color:rgb(240, 234, 226);
 
 }
    
@@ -42,7 +42,7 @@ ul.navbar{
     top: 0;
     margin: 0;
     padding: 0;
-    background:  #3a5311;
+    background: green;
     z-index: 1;
 }
 ul.navbar li{
@@ -148,11 +148,4 @@ button.seemore{
         padding: 10px;
     }
 }
-footer{
-    background-color:black ;
-    width: 100%;
-}
-.contact{
-    color:white;
-    width: 20%;
-}
+

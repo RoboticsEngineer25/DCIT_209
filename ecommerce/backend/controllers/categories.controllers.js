@@ -14,8 +14,13 @@ export async function addCategory(req, res) {
             categoryName,
             parentCategoryId: parentCategoryId || null, // Allow null for root categories
         });
+        const category = await db
+          .select()
+          .from(categories)
+          .where(eq(categories.categoryName, categoryName));
 
-        res.status(201).json({ message: "Category added successfully.", data: result });
+
+        res.status(201).json({ message: "Category added successfully.", data: result,category });
     } catch (error) {
         console.error("Error adding category:", error);
         res.status(500).json({ error: "Internal server error." });

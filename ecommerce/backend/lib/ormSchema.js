@@ -1,4 +1,4 @@
-import { mysqlTable, serial, varchar, text, int,date, decimal, boolean, timestamp, mysqlEnum } from "drizzle-orm/mysql-core";
+import { mysqlTable, serial, varchar, text, int,date, decimal, boolean, timestamp, mysqlEnum, longtext } from "drizzle-orm/mysql-core";
 
 // Users Table
 export const users = mysqlTable("Users", {
@@ -58,7 +58,7 @@ export const products = mysqlTable("Products", {
     description: text("description"),
     stockQuantity: int("stock_quantity").default(0),
     sku: varchar("sku", { length: 100 }).unique(),
-    productImageUrl: varchar("product_image_url", { length: 255 }),
+    productImageUrl: longtext("product_image_url"),
     isActive: boolean("is_active").default(true),
     createdAt: timestamp("created_at", { mode: "string" }).defaultNow(),
     updatedAt: timestamp("updated_at", { mode: "string" }).defaultNow().onUpdateNow(),

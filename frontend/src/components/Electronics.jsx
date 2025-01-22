@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router";
 
 const ProductCard = ({ product }) => (
@@ -18,45 +18,49 @@ const ProductCard = ({ product }) => (
         <button className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
           Add to Cart
         </button>
-        <button className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
-          Add to Wishlist
-        </button>
+        {product.hasWishlist && (
+          <button className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
+            Add to Wishlist
+          </button>
+        )}
       </div>
     </div>
   </div>
 );
 
-const Homepage = () => {
+const Electronics = () => {
   const products = [
     {
       id: 1,
-      title: "West House Stainless Steel",
-      description: "Low power drain\n5 star power rating",
-      price: 500.0,
-      image: "/images/fridge.jpeg",
+      title: "Wireless Headphones",
+      description: "Premium sound quality",
+      price: 10.99,
+      image: "/images/airpods.jpeg",
+      hasWishlist: true,
     },
     {
       id: 2,
-      title: "Luxury Sofa",
-      description:
-        "Live the Luxury with deacon Stainless\nProvides comfort and relaxation",
+      title: "Smart Watch",
+      description: "Track your fitness",
       price: 199.99,
-      image: "/images/sofa.jpg",
+      image: "/images/watch.jpg",
+      hasWishlist: false,
     },
     {
       id: 3,
-      title: "Rice Cooker",
-      description:
-        "Say welcome to noiseless cooking\nFast cooking time and storage quality",
-      price: 30.99,
-      image: "/images/cooker.jpg",
+      title: "Wireless Speaker",
+      description: "360° sound",
+      price: 149.99,
+      image: "/images/speaker.jpg",
+      hasWishlist: true,
     },
     {
       id: 4,
-      title: "Non-stick pan",
-      description: "Cook with no hustle",
-      price: 10.5,
-      image: "/images/pan.jpg",
+      title: "Smart TV",
+      description: "Liven up your home",
+      price: 150.99,
+      image: "/images/computer.jpeg",
+      hasWishlist: true,
     },
   ];
 
@@ -65,7 +69,7 @@ const Homepage = () => {
       <header className="bg-green-600 shadow-sm">
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex justify-between items-center">
-            <h1 className="text-2xl font-bold text-white">Home & Living</h1>
+            <h1 className="text-2xl font-bold text-white">Electronics</h1>
             <div className="flex items-center space-x-4">
               <Link to="/categories" className="text-white hover:text-gray-200">
                 Categories
@@ -131,7 +135,7 @@ const Homepage = () => {
       <footer className="bg-green-600 text-white mt-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center">
-            <p>&copy; 2025 Your Shop. All rights reserved.</p>
+            <p>&copy; 2025 Sphinx. All rights reserved.</p>
           </div>
         </div>
       </footer>
@@ -139,4 +143,4 @@ const Homepage = () => {
   );
 };
 
-export default Homepage;
+export default Electronics;
