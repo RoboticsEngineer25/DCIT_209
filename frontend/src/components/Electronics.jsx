@@ -1,25 +1,38 @@
 import React from "react";
 import { Link } from "react-router";
+import { useQuery } from "@tanstack/react-query";
+
+// Fetch products from the API
+const fetchProducts = async () => {
+  const response = await fetch("http://localhost:5000/api/sphinx/products"); // Replace with your API endpoint
+  if (!response.ok) {
+    throw new Error("Network response was not ok");
+  }
+  return response.json();
+};
 
 const ProductCard = ({ product }) => (
   <div className="bg-white rounded-lg shadow-md overflow-hidden">
     <img
-      src={product.image}
-      alt={product.title}
+      src={product.productImageUrl || "/images/default-product.jpg"} // Fallback image if productImageUrl is null
+      alt={product.productName}
       className="w-full h-48 object-cover"
     />
     <div className="p-4">
-      <h2 className="text-lg font-semibold text-gray-900">{product.title}</h2>
+      <h2 className="text-lg font-semibold text-gray-900">
+        {product.productName}
+      </h2>
       <p className="text-gray-600 mt-1">{product.description}</p>
-      <div className="mt-2 flex justify-between items-center">
+      <div className="mt-2 flex items-center w-full ">
         <span className="text-lg font-bold text-gray-900">
-          ${product.price.toFixed(2)}
+          ${product.price}
         </span>
-        <button className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
+        <button className="bg-blue-600 text-white m-2 p-1 flex-1 rounded-md hover:bg-blue-700">
           Add to Cart
         </button>
+        {/* Add to Wishlist button (optional) */}
         {product.hasWishlist && (
-          <button className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
+          <button className="bg-blue-600 text-white flex-1 rounded-md hover:bg-blue-700">
             Add to Wishlist
           </button>
         )}
@@ -29,40 +42,14 @@ const ProductCard = ({ product }) => (
 );
 
 const Electronics = () => {
-  const products = [
-    {
-      id: 1,
-      title: "Wireless Headphones",
-      description: "Premium sound quality",
-      price: 10.99,
-      image: "/images/airpods.jpeg",
-      hasWishlist: true,
-    },
-    {
-      id: 2,
-      title: "Smart Watch",
-      description: "Track your fitness",
-      price: 199.99,
-      image: "/images/watch.jpg",
-      hasWishlist: false,
-    },
-    {
-      id: 3,
-      title: "Wireless Speaker",
-      description: "360° sound",
-      price: 149.99,
-      image: "/images/speaker.jpg",
-      hasWishlist: true,
-    },
-    {
-      id: 4,
-      title: "Smart TV",
-      description: "Liven up your home",
-      price: 150.99,
-      image: "/images/computer.jpeg",
-      hasWishlist: true,
-    },
-  ];
+  // Use React Query to fetch products
+  const { data, error, isLoading } = useQuery({
+    queryKey: ["products"], // Query key
+    queryFn: fetchProducts, // Query function
+  });
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
 
   return (
     <div className="bg-gray-50 min-h-screen">
@@ -105,9 +92,9 @@ const Electronics = () => {
           </select>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+          {data.map((product) => (
+            <ProductCard key={product.productId} product={product} />
           ))}
         </div>
 

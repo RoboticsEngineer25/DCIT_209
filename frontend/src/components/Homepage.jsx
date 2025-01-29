@@ -11,7 +11,7 @@ const ProductCard = ({ product }) => (
     <div className="p-4">
       <h2 className="text-lg font-semibold text-gray-900">{product.title}</h2>
       <p className="text-gray-600 mt-1">{product.description}</p>
-      <div className="mt-2 flex justify-between items-center">
+      <div className="mt-2 grid gap-2 items-center">
         <span className="text-lg font-bold text-gray-900">
           ${product.price.toFixed(2)}
         </span>
@@ -101,7 +101,7 @@ const Homepage = () => {
           </select>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {products.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
@@ -109,7 +109,7 @@ const Homepage = () => {
 
         <div className="mt-8 flex justify-center">
           <nav className="flex space-x-2">
-            <button className="px-3 py-2 border rounded-md text-gray-600 hover:bg-gray-50">
+            <button className="px-3 py-2 space-x-2 border rounded-md text-gray-600 hover:bg-gray-50">
               Previous
             </button>
             <button className="px-3 py-2 border rounded-md bg-blue-600 text-white">

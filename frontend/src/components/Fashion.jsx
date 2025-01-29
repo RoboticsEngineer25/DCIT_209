@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router";
 
 const products = [
   {
@@ -34,49 +35,27 @@ const products = [
 const Fashion = () => {
   return (
     <div className="bg-gray-50">
-      <header className="bg-green-500 shadow-sm">
+      <header className=" shadow-sm">
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex justify-between items-center">
             <h1 className="text-2xl font-bold text-gray-900">Fashion</h1>
             <div className="flex items-center space-x-4">
-              <a
-                href="Categories.html"
+              <Link
+                to="/categories"
                 className="text-gray-600 hover:text-gray-900"
               >
                 Categories
-              </a>
-              <a href="Cart.html" className="text-gray-600 hover:text-gray-900">
+              </Link>
+              <Link to="/cart" className="text-gray-600 hover:text-gray-900">
                 Cart (0)
-              </a>
+              </Link>
             </div>
           </div>
         </nav>
       </header>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex justify-between items-center mb-6">
-          <div className="flex space-x-4">
-            <select className="border rounded-md px-3 py-2">
-              <option>Filter by Brand</option>
-              <option>Sportwear</option>
-              <option>Cargo jeans</option>
-            </select>
-            <select className="border rounded-md px-3 py-2">
-              <option>Price Range</option>
-              <option>$0 - $100</option>
-              <option>$101 - $500</option>
-              <option>$501+</option>
-            </select>
-          </div>
-          <select className="border rounded-md px-3 py-2">
-            <option>Sort by: Featured</option>
-            <option>Price: Low to High</option>
-            <option>Price: High to Low</option>
-            <option>Newest First</option>
-          </select>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <main className=" mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="grid grid-cols-2 gap-6">
           {products.map((product) => (
             <div
               key={product.id}
@@ -92,7 +71,7 @@ const Fashion = () => {
                   {product.name}
                 </h2>
                 <p className="text-gray-600 mt-1">{product.description}</p>
-                <div className="mt-2 flex justify-between items-center">
+                <div className="mt-2 grid gap-2 items-center">
                   <span className="text-lg font-bold text-gray-900">
                     ${product.price.toFixed(2)}
                   </span>

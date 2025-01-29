@@ -1,7 +1,25 @@
 import React from "react";
 import { Link } from "react-router";
+import { useQuery } from "@tanstack/react-query";
 
-const Product= () => {
+const fetchProducts = async () => {
+  const response = await fetch("http://localhost:5000/api/sphinx/products");
+  if (!response.ok) {
+    throw new Error("Network response was not ok");
+  }
+  return response.json();
+};
+
+const Product = () => {
+  // Use the object syntax for useQuery in v5
+  const { data, error, isLoading } = useQuery({
+    queryKey: ["products"], // Query key as an array
+    queryFn: fetchProducts, // Query function
+  });
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+
   return (
     <div className="bg-gray-50">
       <header className="bg-white shadow-sm">
@@ -17,91 +35,40 @@ const Product= () => {
               >
                 Home
               </Link>
-              <a href="Cart.html" className="text-gray-600 hover:text-gray-900">
+              <Link to="/cart" className="text-gray-600 hover:text-gray-900">
                 Cart (0)
-              </a>
+              </Link>
             </div>
           </div>
         </nav>
       </header>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex justify-between items-center mb-6">
-          <div className="flex space-x-4">
-            <select className="border rounded-md px-3 py-2">
-              <option>Filter by Brand</option>
-              <option>Brand 1</option>
-              <option>Brand 2</option>
-            </select>
-            <select className="border rounded-md px-3 py-2">
-              <option>Price Range</option>
-              <option>$0 - $100</option>
-              <option>$101 - $500</option>
-              <option>$501+</option>
-            </select>
-          </div>
-          <select className="border rounded-md px-3 py-2">
-            <option>Sort by: Featured</option>
-            <option>Price: Low to High</option>
-            <option>Price: High to Low</option>
-            <option>Newest First</option>
-          </select>
-        </div>
+      <main className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="flex justify-between items-center mb-6"></div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {[
-            {
-              image: "images/airpods.jpeg",
-              name: "Wireless Headphones",
-              description: "Premium sound quality",
-              price: "$10.99",
-              hasWishlist: true,
-            },
-            {
-              image: "images/watch.jpg",
-              name: "Smart Watch",
-              description: "Track your fitness",
-              price: "$199.99",
-            },
-            {
-              image: "images/speaker.jpg",
-              name: "Wireless Speaker",
-              description: "360° sound",
-              price: "$149.99",
-            },
-            {
-              image: "images/tendy3.jpg",
-              name: "Low top sneaker",
-              description: "Streamlines your legs for beauty",
-              price: "$15.99",
-            },
-          ].map((product, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 w-full lg:grid-cols-2 gap-6">
+          {data.map((product) => (
             <div
-              key={index}
+              key={product.productId}
               className="bg-white rounded-lg shadow-md overflow-hidden"
             >
               <img
-                src={product.image}
-                alt={product.name}
+                src={product.productImageUrl || "images/default-product.jpg"}
+                alt={product.productName}
                 className="w-full h-48 object-cover"
               />
               <div className="p-4">
                 <h2 className="text-lg font-semibold text-gray-900">
-                  {product.name}
+                  {product.productName}
                 </h2>
                 <p className="text-gray-600 mt-1">{product.description}</p>
-                <div className="mt-2 flex justify-between items-center">
-                  <span className="text-lg font-bold text-gray-900">
-                    {product.price}
+                <div className="mt-2 inline-flex w-full justify-between flex-wrap items-center">
+                  <span className="text-lg font-bold text-gray-900 flex-1">
+                    ${product.price}
                   </span>
-                  <button className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
+                  <button className="flex-1 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
                     Add to Cart
                   </button>
-                  {product.hasWishlist && (
-                    <button className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
-                      Add to Wishlist
-                    </button>
-                  )}
                 </div>
               </div>
             </div>

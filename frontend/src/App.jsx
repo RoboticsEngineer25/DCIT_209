@@ -9,8 +9,9 @@ import CategoryCard from "./components/Categories.jsx"
 import Index from './components/Index.jsx';
 import ShoppingCart from './components/cart.jsx';
 import Electronics from './components/Electronics.jsx';
-import Fashion from './components/fashion.jsx';
+import Fashion from './components/Fashion.jsx';
 import Product from './components/product.jsx';
+import CheckoutForm from './components/checkout.jsx';
 function App() {
 
     return (
@@ -20,13 +21,14 @@ function App() {
                 <Route path="/reset-password" element={<ResetPassword/>}/>
                 <Route path="/signup" element={<SignUp/>}/>
                 <Route path="/home" element={<HomePage/>}/>
-                <Route path="/account" element={<Admin/>}/>
+                <Route path="/admin" element={<Admin/>}/>
                 <Route path='/categories' element={<CategoryCard/>}/>
                 <Route path='/homepage' element={<Index/>}/>
                 <Route path= "/cart" element ={<ShoppingCart/>}/>
                 <Route path='/electronics' element={<Electronics/>}/>
               <Route path='/fashion' element={<Fashion/>}/>
               <Route path="/products" element ={<Product/>}/>
+              <Route path="/checkout" element ={<CheckoutForm/>}/>
             </Routes>
 
         </>

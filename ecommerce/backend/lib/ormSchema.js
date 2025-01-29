@@ -42,10 +42,11 @@ export const termsAgreement = mysqlTable("Terms_Agreement", {
 
 // Categories Table
 export const categories = mysqlTable("Categories", {
-    categoryId: serial("category_id").primaryKey(),
-    categoryName: varchar("category_name", { length: 100 }).notNull(),
-    parentCategoryId: int("parent_category_id").default(null),
-    createdAt: timestamp("created_at", { mode: "string" }).defaultNow(),
+  categoryId: serial("category_id").primaryKey(),
+  categoryName: varchar("category_name", { length: 100 }).notNull(),
+  parentCategoryId: int("parent_category_id").default(null),
+  createdAt: timestamp("created_at", { mode: "string" }).defaultNow(),
+  imageUrl: longtext("category_image"),
 });
 
 
