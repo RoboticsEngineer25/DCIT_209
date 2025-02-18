@@ -12,6 +12,9 @@ import Electronics from './components/Electronics.jsx';
 import Fashion from './components/Fashion.jsx';
 import Product from './components/product.jsx';
 import CheckoutForm from './components/checkout.jsx';
+import Gaming from './components/Gaming.jsx';
+import Groceries from './components/Groceries.jsx';
+import Sports from './components/Sports.jsx';
 function App() {
 
     return (
@@ -29,6 +32,9 @@ function App() {
               <Route path='/fashion' element={<Fashion/>}/>
               <Route path="/products" element ={<Product/>}/>
               <Route path="/checkout" element ={<CheckoutForm/>}/>
+              <Route path="/gaming" element={<Gaming/>}/>
+              <Route path="/groceries" element={<Groceries/>}/>
+                <Route path="/sports" element={<Sports/>}/>
             </Routes>
 
         </>

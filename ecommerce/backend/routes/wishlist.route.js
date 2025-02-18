@@ -3,21 +3,22 @@ import {
     addToWishlist,
     getWishlist,
     removeFromWishlist,
-    clearWishlist
+    clearWishlist,
+    getWishlistWithProducts
 } from "../controllers/wishlist.controllers.js";
 
 const router = express.Router();
 
 // Route to add a product to the wishlist
-router.post("/wishlist", addToWishlist);
+router.post("/", addToWishlist);
 
-// Route to get all products in the user's wishlist
-router.get("/wishlist/:userId", getWishlist);
+// Route to get all products in the user's 
+router.get("/:userId", getWishlist);
 
 // Route to remove a product from the wishlist
-router.delete("/wishlist/:userId/:productId", removeFromWishlist);
+router.delete("/", removeFromWishlist);
 
 // Route to clear all products from the user's wishlist
-router.delete("/wishlist/clear/:userId", clearWishlist);
-
+router.delete("/clear/:userId", clearWishlist);
+router.get("/list/:userId",getWishlistWithProducts);
 export default router;

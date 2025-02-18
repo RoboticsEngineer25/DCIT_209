@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router";
-
-const CartItem = ({ item, onUpdateQuantity, onRemove }) => (
+import { useQuery } from "@tanstack/react-query";
+import useRemoveToWishlist from "../context/removefromcart.js";
+const CartItem = ({ item, onUpdateQuantity, onRemove }) => {
+  const removeFromWishlist=useRemoveToWishlist();
+  return(
   <div className="flex items-center p-5 border-b border-gray-200">
     <img
       src={item.image}
@@ -35,31 +38,52 @@ const CartItem = ({ item, onUpdateQuantity, onRemove }) => (
       </div>
     </div>
     <button
-      onClick={() => onRemove(item.id)}
+      onClick={() =>{ onRemove(item.id)
+        removeFromWishlist.mutate({userId:localStorage.getItem("id")
+      ,productId:item.id})}}
       className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 ml-5"
     >
       Remove
     </button>
   </div>
-);
+)};
 
 const ShoppingCart = () => {
-  const [items, setItems] = useState([
-    {
-      id: 1,
-      title: "Airpod",
-      price: 10.99,
-      image: "/images/airpods.jpeg",
-      quantity: 1,
+  // Fetch wishlist data using react-query
+  const {
+    data: wishlistData,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["wishlist"],
+    queryFn: async () => {
+      const response = await fetch(
+       ` http://localhost:5000/api/sphinx/wishlist/list/2`
+      );
+      if (!response.ok) {
+        throw new Error("Failed to fetch wishlist data");
+      }
+      return response.json();
     },
-    {
-      id: 2,
-      title: "Low top sneaker",
-      price: 15.99,
-      image: "/images/tendy3.jpg",
-      quantity: 1,
-    },
-  ]);
+  });
+
+  // Initialize items state with wishlistData
+  const [items, setItems] = useState([]);
+
+  // Update items state when wishlistData is fetched
+  useEffect(() => {
+    if (wishlistData) {
+      setItems(
+        wishlistData.map((item) => ({
+          id: item.productId,
+          title: item.productName,
+          price: parseFloat(item.price),
+          image: item.productImageUrl,
+          quantity: 1, // Default quantity
+        }))
+      );
+    }
+  }, [wishlistData]);
 
   const updateQuantity = (id, newQuantity) => {
     if (newQuantity < 1) return;
@@ -81,6 +105,18 @@ const ShoppingCart = () => {
   const shipping = 5.99;
   const tax = subtotal * 0.24;
   const total = subtotal + shipping + tax;
+
+  if (isLoading) {
+    return <div className="text-center py-8">Loading...</div>;
+  }
+
+  if (error) {
+    return (
+      <div className="text-center py-8 text-red-500">
+        Error: {error.message}
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-5xl mx-auto p-5 bg-white rounded-lg shadow-sm">

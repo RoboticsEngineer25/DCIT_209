@@ -43,7 +43,7 @@ export async function addProduct(req, res) {
     } = req.body;
 
     // Validate required fields
-    if (!categoryId || !productName || !price || !sku) {
+    if (!categoryId || !productName || !price || !productImage) {
       return res
         .status(400)
         .json({
@@ -229,5 +229,34 @@ export async function deleteProduct(req, res) {
     res
       .status(500)
       .json({ message: "Error deleting product", error: error.message });
+  }
+}
+export async function getProductsByCategoryId(req, res) {
+  const { categoryId } = req.params; // Extract categoryId from the request parameters
+
+  try {
+    // Query the database to get products with the specified categoryId
+    const productsList = await db
+      .select()
+      .from(products)
+      .where(eq(products.categoryId, categoryId));
+
+    // If no products are found, return a 404 response
+    if (productsList.length === 0) {
+      return res
+        .status(404)
+        .json({ message: "No products found for this category." });
+    }
+
+    // Return the list of products
+    res.status(200).json(productsList);
+  } catch (error) {
+    console.error(error);
+    res
+      .status(500)
+      .json({
+        message: "Error fetching products by category",
+        error: error.message,
+      });
   }
 }

@@ -9,7 +9,7 @@ import cookieParser from "cookie-parser";
 dotenv.config();
 const app = express();
 app.use(cookieParser());
-app.use(express.json());
+app.use(express.json({limit:"50mb"}));
 const allowedOrigins = ["http://localhost:5173"]; // Add your frontend's origin
 
 app.use(
@@ -26,11 +26,12 @@ app.use(
 );
 
 app.use(express.urlencoded
-({ extended:false}));
+({ extended:false,limit:"50mb"}));
 const port = process.env.PORT || 5000;
 app.use("/api/auth",authRoutes)
 app.use("/api/sphinx/categories",categoriesRoute)
 app.use("/api/sphinx/products",productRoute)
+app.use("/api/sphinx/wishlist",wishlistRoute)
 app.listen(port, () => {
     console.log(`Server started on port http://localhost:${port}`);
 })

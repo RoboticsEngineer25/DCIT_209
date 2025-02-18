@@ -1,21 +1,22 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Link } from "react-router";
+import {Link} from "react-router"
 import useAddToWishlist from "../context/cart";
 // Fetch products from the API
 const fetchProducts = async () => {
-  const response = await fetch("http://localhost:5000/api/sphinx/products/19"); // Replace with your API endpoint
+  const response = await fetch("http://localhost:5000/api/sphinx/products/22"); // Replace with your API endpoint
   if (!response.ok) {
     throw new Error("Network response was not ok");
   }
   return response.json();
 };
-const Fashion = () => {
+
+const Groceries = () => {
+  // Use React Query to fetch products
 const addToWishlist = useAddToWishlist();
 
-  // Use React Query to fetch products
   const { data, error, isLoading } = useQuery({
-    queryKey: ["products"], // Query key
+    queryKey: ["groceries"], // Query key
     queryFn: fetchProducts, // Query function
   });
 
@@ -27,7 +28,7 @@ const addToWishlist = useAddToWishlist();
       <header className="bg-green-500 shadow-sm">
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex justify-between items-center">
-            <h1 className="text-2xl font-bold text-gray-900">Fashion</h1>
+            <h1 className="text-2xl font-bold text-gray-900">Groceries</h1>
             <div className="flex items-center space-x-4">
               <Link
                 to="/categories"
@@ -35,38 +36,16 @@ const addToWishlist = useAddToWishlist();
               >
                 Categories
               </Link>
-              <a href="/cart" className="text-gray-600 hover:text-gray-900">
+              <Link to="/cart" className="text-gray-600 hover:text-gray-900">
                 Cart (0)
-              </a>
+              </Link>
             </div>
           </div>
         </nav>
       </header>
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex justify-between items-center mb-6">
-          <div className="flex space-x-4">
-            <select className="border rounded-md px-3 py-2">
-              <option>Filter by Brand</option>
-              <option>Sportwear</option>
-              <option>Cargo jeans</option>
-            </select>
-            <select className="border rounded-md px-3 py-2">
-              <option>Price Range</option>
-              <option>$0 - $100</option>
-              <option>$101 - $500</option>
-              <option>$501+</option>
-            </select>
-          </div>
-          <select className="border rounded-md px-3 py-2">
-            <option>Sort by: Featured</option>
-            <option>Price: Low to High</option>
-            <option>Price: High to Low</option>
-            <option>Newest First</option>
-          </select>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {data.map((product) => (
             <div
               key={product.productId}
@@ -86,11 +65,10 @@ const addToWishlist = useAddToWishlist();
                   <span className="text-lg font-bold text-gray-900">
                     ${product.price}
                   </span>
-                
-                  <button className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700" 
-                 onClick={()=>addToWishlist.mutate({userId:localStorage.getItem("id"),productId:product.productId})} >  Add to Cart
+                  <button className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700" onClick={()=>addToWishlist.mutate({userId:localStorage.getItem("id"),productId:product.productId})}>
+                    Add to Cart
                   </button>
-                </div>
+                             </div>
               </div>
             </div>
           ))}
@@ -135,7 +113,7 @@ const addToWishlist = useAddToWishlist();
       <footer className="bg-green-500 text-white mt-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center">
-            <p>&copy; 2025 Sphinx. All rights reserved.</p>
+            <p>&copy; 2025 Your Shop. All rights reserved.</p>
           </div>
         </div>
       </footer>
@@ -143,4 +121,4 @@ const addToWishlist = useAddToWishlist();
   );
 };
 
-export default Fashion;
+export default Groceries;

@@ -1,12 +1,13 @@
 import React from "react";
+import {useNavigate} from "react-router";
 
 const CheckoutForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission
   };
-
-  return (
+const navigate=useNavigate();
+  return ( 
     <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8 ">
       <div className="max-w-4xl mx-auto">
         <div className="bg-white shadow rounded-lg">
@@ -19,7 +20,7 @@ const CheckoutForm = () => {
             {/* Customer Details */}
             <div className="mb-8">
               <h2 className="text-lg font-medium text-gray-900 mb-4">
-                Customer Details
+                Customer Details 
               </h2>
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div>
@@ -29,7 +30,7 @@ const CheckoutForm = () => {
                   <input
                     type="text"
                     className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-                  />
+                  required/>
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700">
@@ -38,7 +39,7 @@ const CheckoutForm = () => {
                   <input
                     type="text"
                     className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-                  />
+                  required/>
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700">
@@ -47,7 +48,7 @@ const CheckoutForm = () => {
                   <input
                     type="email"
                     className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-                  />
+                  required/>
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700">
@@ -56,7 +57,7 @@ const CheckoutForm = () => {
                   <input
                     type="tel"
                     className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-                  />
+                  required/>
                 </div>
               </div>
             </div>
@@ -74,7 +75,7 @@ const CheckoutForm = () => {
                   <input
                     type="text"
                     className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-                  />
+                  required/>
                 </div>
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
                   <div>
@@ -84,7 +85,7 @@ const CheckoutForm = () => {
                     <input
                       type="text"
                       className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-                    />
+                    required/>
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700">
@@ -93,7 +94,7 @@ const CheckoutForm = () => {
                     <input
                       type="text"
                       className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-                    />
+                    required/>
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700">
@@ -102,7 +103,7 @@ const CheckoutForm = () => {
                     <input
                       type="text"
                       className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-                    />
+                    required/>
                   </div>
                 </div>
               </div>
@@ -122,7 +123,7 @@ const CheckoutForm = () => {
                     type="text"
                     className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
                     placeholder="**** **** **** ****"
-                  />
+                  required/>
                 </div>
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
                   <div>
@@ -143,44 +144,18 @@ const CheckoutForm = () => {
                       type="text"
                       className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
                       placeholder="***"
-                    />
+                    required/>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Order Summary */}
-            <div className="mb-8">
-              <h2 className="text-lg font-medium text-gray-900 mb-4">
-                Order Summary
-              </h2>
-              <div className="bg-gray-50 p-4 rounded-lg">
-                <div className="flex justify-between mb-2">
-                  <span className="text-gray-600">Subtotal</span>
-                  <span className="text-gray-900">$26.98</span>
-                </div>
-                <div className="flex justify-between mb-2">
-                  <span className="text-gray-600">Shipping</span>
-                  <span className="text-gray-900">$5.99</span>
-                </div>
-                <div className="flex justify-between mb-2">
-                  <span className="text-gray-600">Tax</span>
-                  <span className="text-gray-900">$6.40</span>
-                </div>
-                <div className="border-t border-gray-200 mt-2 pt-2">
-                  <div className="flex justify-between">
-                    <span className="font-medium text-gray-900">Total</span>
-                    <span className="font-medium text-gray-900">$39.37</span>
-                  </div>
-                </div>
-              </div>
-            </div>
 
             {/* Buttons */}
             <div className="space-y-4">
               <button
                 type="button"
-                onClick={() => (window.location.href = "Cart.html")}
+                onClick={() => {navigate("/cart")}}
                 className="w-auto bg-green-600 text-white py-3 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 Return
