@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router";
 import { useQuery } from "@tanstack/react-query";
+import useAddToWishlist from "../context/cart";
 
 const fetchProducts = async () => {
   const response = await fetch("http://localhost:5000/api/sphinx/products");
@@ -11,6 +12,7 @@ const fetchProducts = async () => {
 };
 
 const Product = () => {
+  const wishlist=useAddToWishlist();
   // Use the object syntax for useQuery in v5
   const { data, error, isLoading } = useQuery({
     queryKey: ["products"], // Query key as an array
@@ -66,7 +68,7 @@ const Product = () => {
                   <span className="text-lg font-bold text-gray-900 flex-1">
                     ${product.price}
                   </span>
-                  <button className="flex-1 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
+                  <button className="flex-1 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700" onClick={()=>wishlist.mutate({userId:localStorage.getItem("id"),productId:product.productId})}>
                     Add to Cart
                   </button>
                 </div>

@@ -4,7 +4,7 @@ import {useNavigate} from "react-router";
 const CheckoutForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission
+    navigate("/payment");
   };
 const navigate=useNavigate();
   return ( 

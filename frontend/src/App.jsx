@@ -15,6 +15,7 @@ import CheckoutForm from './components/checkout.jsx';
 import Gaming from './components/Gaming.jsx';
 import Groceries from './components/Groceries.jsx';
 import Sports from './components/Sports.jsx';
+import PaymentSuccess from './components/payment.jsx';
 function App() {
 
     return (
@@ -35,6 +36,7 @@ function App() {
               <Route path="/gaming" element={<Gaming/>}/>
               <Route path="/groceries" element={<Groceries/>}/>
                 <Route path="/sports" element={<Sports/>}/>
+                <Route path='/payment' element={<PaymentSuccess/>}/>
             </Routes>
 
         </>

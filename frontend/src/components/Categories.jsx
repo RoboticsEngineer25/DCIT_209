@@ -72,11 +72,7 @@ const CategoriesPage = () => {
             </Link>
 
             <div className="flex-1 max-w-xl mx-8">
-              <input
-                type="search"
-                placeholder="Search products, brands and categories"
-                className="w-full px-4 py-2 rounded-lg border"
-              />
+             
             </div>
 
             <div className="flex items-center space-x-6">
@@ -84,7 +80,7 @@ const CategoriesPage = () => {
                 { to: "/homepage", text: "Home" },
                 { to: "/categories", text: "Categories" },
                 { to: "/", text: "Account" },
-                { to: "/wishlist", text: "Wishlist" },
+                
                 { to: "/cart", text: "Cart" },
               ].map((link) => (
                 <Link key={link.to} to={link.to} className="text-center">

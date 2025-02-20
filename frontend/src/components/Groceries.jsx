@@ -24,8 +24,8 @@ const addToWishlist = useAddToWishlist();
   if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <div className="bg-gray-50">
-      <header className="bg-green-500 shadow-sm">
+    <div className="">
+      <header className=" shadow-sm">
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex justify-between items-center">
             <h1 className="text-2xl font-bold text-gray-900">Groceries</h1>
@@ -45,7 +45,7 @@ const addToWishlist = useAddToWishlist();
       </header>
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2  gap-6">
           {data.map((product) => (
             <div
               key={product.productId}

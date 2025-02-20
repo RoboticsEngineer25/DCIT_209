@@ -83,18 +83,13 @@ const Index= () => {
               />
             </Link>
           </li>
-          <li className="flex-1 max-w-xl mx-8">
-            <input
-              type="search"
-              placeholder="Search products, brands and categories"
-              className="w-full px-4 py-2 rounded-lg border"
-            />
-          </li>
+          <div>
+
+          </div>
           {[
             { to: "/homepage", text: "Home" },
             { to: "/categories", text: "Categories" },
             { to: "/account", text: "Account" },
-            { to: "/wishlist", text: "Wishlist" },
             { to: "/cart", text: "Cart" },
           ].map((link) => (
             <li key={link.to}>

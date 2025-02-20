@@ -22,8 +22,8 @@ const Gaming = () => {
   if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <div className="bg-gray-50 min-h-screen">
-      <header className="bg-green-600 text-white py-4 shadow-sm">
+    <div className="">
+      <header className="  py-4 shadow-sm">
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
           <h1 className="text-2xl font-bold">Gaming</h1>
           <div className="flex items-center space-x-4">
